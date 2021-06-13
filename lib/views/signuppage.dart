@@ -12,21 +12,18 @@ class SignUpPage extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           color: themeController.theme.canvasColor,
-          child: Positioned(
-            left: MediaQuery.of(context).size.width * -0.5,
-            child: Align(
-              alignment: Alignment.topRight,
-              child: Container(
-                color: Colors.transparent,
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.5,
-                child: Hero(
-                  tag: 'car',
-                  child: Image.asset(
-                    'assets/car.png',
-                    alignment: Alignment.centerLeft,
-                    fit: BoxFit.fitWidth,
-                  ),
+          child: Align(
+            alignment: Alignment.topRight,
+            child: Container(
+              color: Colors.transparent,
+              width: MediaQuery.of(context).size.width * 0.75,
+              height: MediaQuery.of(context).size.height * 0.5,
+              child: Hero(
+                tag: 'car',
+                child: Image.asset(
+                  'assets/car.png',
+                  alignment: Alignment.centerLeft,
+                  fit: BoxFit.fitHeight,
                 ),
               ),
             ),

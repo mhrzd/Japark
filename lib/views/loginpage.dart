@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:japark/controllers/themecontroller.dart';
 import 'package:japark/views/components/accentbutton.dart';
+import 'package:japark/views/components/fulltextfield.dart';
 import 'package:japark/views/components/primarybutton.dart';
 import 'package:japark/views/signuppage.dart';
 
@@ -39,33 +40,56 @@ class LoginPage extends StatelessWidget {
         Scaffold(
           backgroundColor: Colors.transparent,
           body: SafeArea(
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(44.0),
-                  child: Align(
-                    alignment: Alignment.topRight,
-                    child: Hero(
-                      tag: 'text',
-                      child: Text(
-                        'کجاپارک',
-                        style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: themeController.theme.primaryColor),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(44.0),
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: Hero(
+                        tag: 'text',
+                        child: Text(
+                          'کجاپارک',
+                          style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              color: themeController.theme.primaryColor),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                AccentButton(
-                    onTap: () {
-                      Get.to(SignUpPage());
-                    },
-                    child: Text(
-                      'برو',
-                      textAlign: TextAlign.center,
-                    ))
-              ],
+                  Padding(
+                    padding: EdgeInsets.only(top: 200.0, bottom: 20),
+                    child: FullTextField(
+                      hint: 'ایمیل',
+                    ),
+                  ),
+                  FullTextField(
+                    hint: 'رمزعبور',
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 44),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text('رمز عبور را فراموش کرده اید؟'),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 100.0),
+                    child: AccentButton(
+                        onTap: () {
+                          Get.to(SignUpPage());
+                        },
+                        child: Text(
+                          'برو',
+                          textAlign: TextAlign.center,
+                        )),
+                  )
+                ],
+              ),
             ),
           ),
         ),

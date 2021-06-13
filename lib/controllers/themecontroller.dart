@@ -6,6 +6,7 @@ class ThemeController {
       accentColor: Color(0xfff7ac15),
       primaryColor: Color(0xff9827db),
       buttonColor: Color(0xff9827db),
+      hintColor: Color(0xff9A4FC7),
       splashColor: Color(0xff451661),
       fontFamily: 'IranSans');
 }
