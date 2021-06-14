@@ -4,6 +4,7 @@ import 'package:japark/controllers/themecontroller.dart';
 import 'package:japark/views/components/accentbutton.dart';
 import 'package:japark/views/components/fulltextfield.dart';
 import 'package:japark/views/components/primarybutton.dart';
+import 'package:japark/views/homepage.dart';
 import 'package:japark/views/signuppage.dart';
 
 class LoginPage extends StatelessWidget {
@@ -39,6 +40,35 @@ class LoginPage extends StatelessWidget {
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
+          bottomNavigationBar: Container(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(bottom: 20),
+                  child: PrimaryButton(
+                      onTap: () {
+                        Get.to(HomePage());
+                      },
+                      child: Text(
+                        'ورود',
+                        textAlign: TextAlign.center,
+                      )),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 40),
+                  child: AccentButton(
+                      onTap: () {
+                        Get.to(SignUpPage());
+                      },
+                      child: Text(
+                        'ثبت نام',
+                        textAlign: TextAlign.center,
+                      )),
+                )
+              ],
+            ),
+          ),
           body: SafeArea(
             child: SingleChildScrollView(
               child: Column(
@@ -60,7 +90,9 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 200.0, bottom: 20),
+                    padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height * 0.28,
+                        bottom: 20),
                     child: FullTextField(
                       hint: 'ایمیل',
                     ),
@@ -77,17 +109,6 @@ class LoginPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 100.0),
-                    child: AccentButton(
-                        onTap: () {
-                          Get.to(SignUpPage());
-                        },
-                        child: Text(
-                          'برو',
-                          textAlign: TextAlign.center,
-                        )),
-                  )
                 ],
               ),
             ),

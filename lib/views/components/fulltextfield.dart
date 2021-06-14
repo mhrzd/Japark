@@ -21,7 +21,7 @@ class FullTextField extends StatelessWidget {
               color: themeController.theme.canvasColor,
               borderRadius: BorderRadius.circular(50),
               border: Border.all(
-                  width: 2, color: themeController.theme.splashColor)),
+                  width: 2, color: themeController.theme.primaryColorDark)),
           child: TextField(
             controller: textEditingController,
             textAlign: TextAlign.right,

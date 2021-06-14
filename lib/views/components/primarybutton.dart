@@ -21,7 +21,7 @@ class PrimaryButton extends StatelessWidget {
               primary: themeController.theme.primaryColor,
               shape: StadiumBorder(),
               side: BorderSide(
-                  width: 2, color: themeController.theme.splashColor),
+                  width: 2, color: themeController.theme.primaryColorDark),
               textStyle: TextStyle(
                   fontFamily: 'IranSans',
                   fontWeight: FontWeight.bold,
