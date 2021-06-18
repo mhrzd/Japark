@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:japark/controllers/logincontroller.dart';
 import 'package:japark/controllers/themecontroller.dart';
 import 'package:japark/views/components/accentbutton.dart';
 import 'package:japark/views/components/fulltextfield.dart';
 import 'package:japark/views/components/primarybutton.dart';
+import 'package:japark/views/forgetpage.dart';
 import 'package:japark/views/homepage.dart';
 import 'package:japark/views/signuppage.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
   ThemeController themeController = ThemeController();
-  TextEditingController user = TextEditingController();
-  TextEditingController pass = TextEditingController();
+  LoginController loginController = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +41,7 @@ class LoginPage extends StatelessWidget {
           ),
         ),
         Scaffold(
+          key: loginController.scaffoldKey,
           backgroundColor: Colors.transparent,
           bottomNavigationBar: Container(
             child: Column(
@@ -48,7 +51,15 @@ class LoginPage extends StatelessWidget {
                   padding: EdgeInsets.only(bottom: 20),
                   child: PrimaryButton(
                       onTap: () {
-                        Get.to(HomePage());
+                        if (loginController.email.text.isEmpty ||
+                            loginController.pass.text.isEmpty) {
+                          Fluttertoast.showToast(
+                              msg: 'لطفا فیلد های خالی را پر کنید');
+                        } else {
+                          loginController.login().then((value) {
+                            if (value) Get.offAll(HomePage());
+                          });
+                        }
                       },
                       child: Text(
                         'ورود',
@@ -95,18 +106,29 @@ class LoginPage extends StatelessWidget {
                         bottom: 20),
                     child: FullTextField(
                       hint: 'ایمیل',
+                      textEditingController: loginController.email,
                     ),
                   ),
                   FullTextField(
                     hint: 'رمزعبور',
+                    textEditingController: loginController.pass,
+                    obscureText: true,
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 44),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text('رمز عبور را فراموش کرده اید؟'),
-                      ],
+                  InkWell(
+                    highlightColor: Colors.transparent,
+                    splashColor: Colors.transparent,
+                    onTap: () {
+                      Get.to(ForgetPage());
+                    },
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 44),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text('رمز عبور را فراموش کرده اید؟'),
+                        ],
+                      ),
                     ),
                   ),
                 ],

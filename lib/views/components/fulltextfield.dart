@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:japark/controllers/themecontroller.dart';
 
 class FullTextField extends StatelessWidget {
-  FullTextField({Key? key, this.hint = '', this.textEditingController})
+  FullTextField(
+      {Key? key,
+      this.hint = '',
+      this.textEditingController,
+      this.keyboardType = TextInputType.text,
+      this.obscureText = false,
+      this.inputFormatters})
       : super(key: key);
   final String hint;
+  final List<TextInputFormatter>? inputFormatters;
   final TextEditingController? textEditingController;
+  final TextInputType keyboardType;
+  final bool obscureText;
   ThemeController themeController = ThemeController();
 
   @override
@@ -23,9 +33,12 @@ class FullTextField extends StatelessWidget {
               border: Border.all(
                   width: 2, color: themeController.theme.primaryColorDark)),
           child: TextField(
+            obscureText: obscureText,
             controller: textEditingController,
             textAlign: TextAlign.right,
             textAlignVertical: TextAlignVertical.bottom,
+            keyboardType: keyboardType,
+            inputFormatters: inputFormatters,
             decoration: InputDecoration(
               hintText: hint,
               border: InputBorder.none,

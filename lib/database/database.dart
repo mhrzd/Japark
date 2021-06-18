@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:japark/models/parking.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -14,12 +15,13 @@ class MyDatabase {
   static final String PlateNumber = "plateNumber";
   static final String EnterDate = "enterDate";
   static final String ExitDate = "exitDate";
+  static final String EstimatedTime = "estimatedTime";
   static final String Exited = "exited";
   static final String TotalCharge = "totalCharge";
   //parking table
   static final String ParkingTable = "parking";
   static final String ParkingID = "parkingId";
-  static final String EmailPhone = "emailPhone";
+  static final String Email = "email";
   static final String ParkingName = "parkingName";
   static final String Capacity = "capacity";
   static final String Occupied = "occupied";
@@ -57,7 +59,7 @@ class MyDatabase {
         "(" +
         ParkingID +
         " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE," +
-        EmailPhone +
+        Email +
         " TEXT NOT NULL UNIQUE," +
         ParkingName +
         " TEXT NOT NULL," +
@@ -91,6 +93,8 @@ class MyDatabase {
         " TEXT NOT NULL," +
         EnterDate +
         " TEXT NOT NULL," +
+        EstimatedTime +
+        " INTEGER NOT NULL," +
         ExitDate +
         " TEXT," +
         Exited +
@@ -112,9 +116,23 @@ class MyDatabase {
     return i;
   }
 
-  Future<int> carExit(Map<String, dynamic> row) async {
+  Future<int> carExit(Map<String, dynamic> row, int _carID, int _pID) async {
     Database? db = await instance.database;
-    int i = await db!.update(CarTable, row);
+    int i = await db!.update(CarTable, row,
+        where: '$CarID = ? and $ParkingID = ?', whereArgs: [_carID, _pID]);
+    return i;
+  }
+
+  Future<int> updateParking(Map<String, dynamic> row, _pId) async {
+    Database? db = await instance.database;
+    int i = await db!
+        .update(ParkingTable, row, where: '$ParkingID = ?', whereArgs: [_pId]);
+    return i;
+  }
+
+  Future<int> setParkingOccupied(Map<String, dynamic> row,int _pId) async {
+    Database? db = await instance.database;
+    int i = await db!.update(ParkingTable, row,where: "$ParkingID = ?",whereArgs: [_pId]);
     return i;
   }
 
@@ -122,6 +140,48 @@ class MyDatabase {
     Database? db = await instance.database;
     int i = await db!.insert(ParkingTable, row);
     return i;
+  }
+
+  Future<Parking?> getParkingByEmail(_email) async {
+    Database? db = await instance.database;
+    List<Map<String, dynamic>> data = await db!
+        .query(ParkingTable + " WHERE $Email = ?", whereArgs: [_email]);
+    if (data.isNotEmpty && data != null) {
+      return Parking.fromJson(data.first);
+    } else
+      return null;
+  }
+
+  Future<Map<String, dynamic>?> getCarToExit(String _plate, int? _pID) async {
+    Database? db = await instance.database;
+    List<Map<String, dynamic>> data = await db!.query(
+        CarTable + " WHERE $PlateNumber = ? and $Exited = ? and $ParkingID = ?",
+        whereArgs: [_plate, 0, _pID]);
+    if (data.isNotEmpty && data != null) {
+      return data.first;
+    } else
+      return null;
+  }
+
+  Future<Map<String, dynamic>?> getParkingById(int _pID) async {
+    Database? db = await instance.database;
+    List<Map<String, dynamic>> data = await db!
+        .query(ParkingTable + " WHERE $ParkingID = ?", whereArgs: [_pID]);
+    if (data.isNotEmpty && data != null) {
+      return data.first;
+    } else
+      return null;
+  }
+
+  Future<Map<String, dynamic>?> login(String _email, String _pass) async {
+    Database? db = await instance.database;
+    List<Map<String, dynamic>> data = await db!.query(
+        ParkingTable + " WHERE $Email = ? and $Password = ?",
+        whereArgs: [_email, _pass]);
+    if (data.isNotEmpty && data != null) {
+      return data.first;
+    } else
+      return null;
   }
 
   Future<List<Map<String, dynamic>>> getAllParkings() async {
@@ -132,5 +192,15 @@ class MyDatabase {
   Future<List<Map<String, dynamic>>> getAllCars() async {
     Database? db = await instance.database;
     return await db!.query(CarTable);
+  }
+
+  Future<List<Map<String, dynamic>?>> getParkingCars(int? _pId) async {
+    Database? db = await instance.database;
+    List<Map<String, dynamic>> data =
+        await db!.query(CarTable + " WHERE $ParkingID = ?", whereArgs: [_pId]);
+    if (data.isNotEmpty && data != null) {
+      return data;
+    } else
+      return [];
   }
 }

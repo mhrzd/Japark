@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:japark/controllers/signupcontroller.dart';
 import 'package:japark/controllers/themecontroller.dart';
 import 'package:japark/views/components/accentbutton.dart';
 import 'package:japark/views/components/fulltextfield.dart';
 import 'package:japark/views/components/primarybutton.dart';
+import 'package:japark/views/signup2page.dart';
 
 class SignUpPage extends StatelessWidget {
   SignUpPage({Key? key}) : super(key: key);
   ThemeController themeController = ThemeController();
+  SignUpController signUpController = Get.put(SignUpController());
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -42,11 +46,32 @@ class SignUpPage extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(bottom: 40),
                   child: PrimaryButton(
-                      onTap: () {
-                        
+                      onTap: () async {
+                        signUpController.checkEmail().then((value) {
+                          if (signUpController.email.text.isEmpty ||
+                              signUpController.pass.text.isEmpty ||
+                              signUpController.repass.text.isEmpty ||
+                              signUpController.question.text.isEmpty ||
+                              signUpController.answer.text.isEmpty) {
+                            Fluttertoast.showToast(
+                                msg: 'لطفا فیلد های خالی را پر کنید');
+                          } else if (signUpController.pass.text !=
+                              signUpController.repass.text) {
+                            Fluttertoast.showToast(
+                                msg: 'رمزعبور با تکرار آن مغایرت دارد');
+                          } else if (!signUpController.email.text.isEmail) {
+                            Fluttertoast.showToast(
+                                msg: 'فرمت ایمیل وارد شده اشتباه است');
+                          } else if (!value) {
+                            Fluttertoast.showToast(
+                                msg: 'ایمیل وارد شده تکراری است');
+                          } else {
+                            Get.to(SignUp2Page());
+                          }
+                        });
                       },
                       child: Text(
-                        'ثبت نام',
+                        'ادامه',
                         textAlign: TextAlign.center,
                       )),
                 )
@@ -79,16 +104,36 @@ class SignUpPage extends StatelessWidget {
                         bottom: 20),
                     child: FullTextField(
                       hint: 'ایمیل',
+                      textEditingController: signUpController.email,
+                      keyboardType: TextInputType.emailAddress,
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(bottom: 20),
                     child: FullTextField(
                       hint: 'رمزعبور',
+                      obscureText: true,
+                      textEditingController: signUpController.pass,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 20),
+                    child: FullTextField(
+                      hint: 'تکرار رمزعبور',
+                      obscureText: true,
+                      textEditingController: signUpController.repass,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 20),
+                    child: FullTextField(
+                      hint: 'سوال بازیابی رمز',
+                      textEditingController: signUpController.question,
                     ),
                   ),
                   FullTextField(
-                    hint: 'تکرار رمزعبور',
+                    hint: 'پاسخ بازیابی رمز',
+                    textEditingController: signUpController.answer,
                   ),
                 ],
               ),
