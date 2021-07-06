@@ -83,18 +83,20 @@ class SignUp2Page extends StatelessWidget {
                         if (signUpController.parkingName.text.isEmpty ||
                             signUpController.capacity.text.isEmpty ||
                             signUpController.chargePH.text.isEmpty ||
-                            signUpController.enterCharge.text.isEmpty) {
+                            signUpController.enterCharge.text.isEmpty ||
+                            signUpController.floors.text.isEmpty) {
                           Fluttertoast.showToast(
                               msg: 'لطفا فیلد های خالی را پر کنید');
                         } else if (int.parse(signUpController.capacity.text) ==
                                 0 ||
-                            int.parse(signUpController.chargePH.text) == 0 ||
-                            int.parse(signUpController.enterCharge.text) == 0) {
+                            int.parse(signUpController.chargePH.text) <= 0 ||
+                            int.parse(signUpController.enterCharge.text) <= 0 ||
+                            int.parse(signUpController.floors.text) <= 0) {
                           Fluttertoast.showToast(
                               msg: 'فیلد ها نمی توانند صفر باشند');
                         } else {
                           signUpController.signUp().then((value) {
-                            if (value !=null) {
+                            if (value != null) {
                               Get.offAll(HomePage());
                             }
                           });
@@ -129,6 +131,17 @@ class SignUp2Page extends StatelessWidget {
                         FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                       ],
                       textEditingController: signUpController.capacity,
+                      keyboardType: TextInputType.number,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 20),
+                    child: FullTextField(
+                      hint: 'تعداد طبقات',
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                      ],
+                      textEditingController: signUpController.floors,
                       keyboardType: TextInputType.number,
                     ),
                   ),

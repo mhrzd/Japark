@@ -9,6 +9,7 @@ class Parking {
   String? password;
   String? question;
   String? answer;
+  int? floors;
 
   Parking(
       {this.parkingId,
@@ -18,6 +19,7 @@ class Parking {
       this.occupied,
       this.enterCharge,
       this.chargePerHour,
+      this.floors,
       this.password,
       this.question,
       this.answer});
@@ -29,6 +31,7 @@ class Parking {
     capacity = json['capacity'];
     occupied = json['occupied'];
     enterCharge = json['enterCharge'];
+    floors = json['floors'];
     chargePerHour = json['chargePerHour'];
     password = json['password'];
     question = json['question'];
@@ -47,6 +50,7 @@ class Parking {
     data['password'] = this.password;
     data['question'] = this.question;
     data['answer'] = this.answer;
+    data['floors'] = this.floors;
     return data;
   }
 }

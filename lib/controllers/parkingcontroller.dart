@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:japark/database/database.dart';
 import 'package:japark/models/car.dart';
-import 'dart:convert';
 
 import 'package:japark/models/parking.dart';
 
@@ -19,6 +18,7 @@ class ParkingController extends GetxController {
   TextEditingController chargePHT = TextEditingController();
   TextEditingController answerT = TextEditingController();
   TextEditingController questionT = TextEditingController();
+  TextEditingController floorsT = TextEditingController();
   void setOccupied(int i) {
     parking!.occupied = i;
     update();
@@ -31,6 +31,7 @@ class ParkingController extends GetxController {
     chargePHT.text = parking!.chargePerHour!.toString();
     answerT.text = parking!.answer!;
     questionT.text = parking!.question!;
+    floorsT.text = parking!.floors!.toString();
   }
 
   Map<String, double> getGraphMap() {
@@ -91,10 +92,11 @@ class ParkingController extends GetxController {
     t.chargePerHour = int.parse(chargePHT.text);
     t.answer = answerT.text;
     t.question = questionT.text;
+    t.floors = int.parse(floorsT.text);
 
     int a = await database.updateParking(t.toJson(), parking!.parkingId);
     var x = await database.getParkingById(parking!.parkingId!);
-    parking = Parking.fromJson(x!);
+    parking = Parking.fromJson(x!); 
     return a;
   }
 

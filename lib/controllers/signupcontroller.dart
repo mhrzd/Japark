@@ -14,6 +14,7 @@ class SignUpController extends GetxController {
   TextEditingController repass = TextEditingController();
   TextEditingController parkingName = TextEditingController();
   TextEditingController capacity = TextEditingController();
+  TextEditingController floors = TextEditingController();
   TextEditingController enterCharge = TextEditingController();
   TextEditingController chargePH = TextEditingController();
   TextEditingController answer = TextEditingController();
@@ -27,6 +28,7 @@ class SignUpController extends GetxController {
       MyDatabase.Capacity: int.parse(capacity.text),
       MyDatabase.EnterCharge: int.parse(enterCharge.text),
       MyDatabase.ChargePerHour: int.parse(chargePH.text),
+      MyDatabase.Floors: int.parse(floors.text),
       MyDatabase.Occupied: 0,
       MyDatabase.Answer: answer.text,
       MyDatabase.Question: question.text

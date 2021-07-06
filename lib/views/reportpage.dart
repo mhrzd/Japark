@@ -47,7 +47,7 @@ class _ReportPageState extends State<ReportPage> {
                   child: SvgPicture.asset('assets/back.svg'))),
         ),
         child: Text(
-          'خروج خودرو',
+          'گزارش ماهانه',
           style: TextStyle(
               color: themeController.theme.primaryColor,
               fontFamily: 'IranSans',

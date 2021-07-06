@@ -9,6 +9,7 @@ import 'package:japark/views/addcarpage.dart';
 import 'package:japark/views/components/accentbutton.dart';
 import 'package:japark/views/components/customappbar.dart';
 import 'package:japark/views/editpage.dart';
+import 'package:japark/views/listpage.dart';
 import 'package:japark/views/signup2page.dart';
 import 'package:japark/views/reportpage.dart';
 import 'package:japark/views/exitcarpage.dart';
@@ -169,6 +170,29 @@ class HomePage extends StatelessWidget {
                           child: SvgPicture.asset('assets/exit_white.svg')),
                       Text(
                         'خروج خودرو',
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 20),
+                child: PrimaryButton(
+                  onTap: () {
+                    Get.to(ListPage());
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                          width: MediaQuery.of(context).size.width * 0.07,
+                          height: MediaQuery.of(context).size.width * 0.07,
+                          margin: EdgeInsets.only(right: 10),
+                          child:
+                              FittedBox(child: Icon(Icons.view_list_rounded))),
+                      Text(
+                        'لیست خودرو ها',
                         textAlign: TextAlign.center,
                       ),
                     ],

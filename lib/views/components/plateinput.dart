@@ -21,7 +21,10 @@ class PlateInput extends StatefulWidget {
 
 class _PlateInputState extends State<PlateInput> {
   ThemeController themeController = ThemeController();
-
+  FocusNode focusNode1 = FocusNode(),
+      focusNode2 = FocusNode(),
+      focusNode3 = FocusNode(),
+      focusNode4 = FocusNode();
   @override
   void initState() {
     // TODO: implement initState
@@ -75,8 +78,14 @@ class _PlateInputState extends State<PlateInput> {
                   ],
                   keyboardType: TextInputType.number,
                   textAlignVertical: TextAlignVertical.bottom,
+                  focusNode: focusNode1,
                   decoration: InputDecoration(
                     hintText: '11',
+                    hintStyle: TextStyle(
+                        fontFamily: 'IranSans',
+                        fontWeight: FontWeight.bold,
+                        color: themeController.theme.hintColor.withOpacity(0.5),
+                        fontSize: 20),
                     border: InputBorder.none,
                   ),
                   style: TextStyle(
@@ -105,12 +114,18 @@ class _PlateInputState extends State<PlateInput> {
                   textAlign: TextAlign.center,
                   textAlignVertical: TextAlignVertical.bottom,
                   keyboardType: TextInputType.text,
+                  focusNode: focusNode2,
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(RegExp(r'^[آ-ی]$')),
                   ],
                   decoration: InputDecoration(
                     hintText: 'ب',
                     border: InputBorder.none,
+                    hintStyle: TextStyle(
+                        fontFamily: 'IranSans',
+                        fontWeight: FontWeight.bold,
+                        color: themeController.theme.hintColor.withOpacity(0.5),
+                        fontSize: 20),
                   ),
                   style: TextStyle(
                       fontFamily: 'IranSans',
@@ -135,6 +150,7 @@ class _PlateInputState extends State<PlateInput> {
                         color: themeController.theme.primaryColorDark)),
                 child: TextField(
                   controller: widget.textEditingController3,
+                  focusNode: focusNode3,
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                   ],
@@ -143,6 +159,11 @@ class _PlateInputState extends State<PlateInput> {
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     hintText: '111',
+                    hintStyle: TextStyle(
+                        fontFamily: 'IranSans',
+                        fontWeight: FontWeight.bold,
+                        color: themeController.theme.hintColor.withOpacity(0.5),
+                        fontSize: 20),
                     border: InputBorder.none,
                   ),
                   style: TextStyle(
@@ -171,11 +192,17 @@ class _PlateInputState extends State<PlateInput> {
                   textAlign: TextAlign.center,
                   keyboardType: TextInputType.number,
                   textAlignVertical: TextAlignVertical.bottom,
+                  focusNode: focusNode4,
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                   ],
                   decoration: InputDecoration(
                     hintText: '11',
+                    hintStyle: TextStyle(
+                        fontFamily: 'IranSans',
+                        fontWeight: FontWeight.bold,
+                        color: themeController.theme.hintColor.withOpacity(0.5),
+                        fontSize: 20),
                     border: InputBorder.none,
                   ),
                   style: TextStyle(

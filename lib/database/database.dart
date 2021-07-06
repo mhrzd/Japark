@@ -16,6 +16,7 @@ class MyDatabase {
   static final String EnterDate = "enterDate";
   static final String ExitDate = "exitDate";
   static final String EstimatedTime = "estimatedTime";
+  static final String ParkFloor = "parkFloor";
   static final String Exited = "exited";
   static final String TotalCharge = "totalCharge";
   //parking table
@@ -27,6 +28,7 @@ class MyDatabase {
   static final String Occupied = "occupied";
   static final String EnterCharge = "enterCharge";
   static final String ChargePerHour = "chargePerHour";
+  static final String Floors = "floors";
   static final String Password = "password";
   static final String Question = "question";
   static final String Answer = "answer";
@@ -71,6 +73,8 @@ class MyDatabase {
         " INTEGER NOT NULL," +
         ChargePerHour +
         " INTEGER NOT NULL," +
+        Floors +
+        " INTEGER NOT NULL," +
         Password +
         " TEXT NOT NULL," +
         Question +
@@ -97,6 +101,8 @@ class MyDatabase {
         " INTEGER NOT NULL," +
         ExitDate +
         " TEXT," +
+        ParkFloor +
+        " INTEGER NOT NULL," +
         Exited +
         " INTEGER NOT NULL DEFAULT 0," +
         TotalCharge +

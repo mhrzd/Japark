@@ -9,6 +9,7 @@ class Car {
   int? estimatedTime;
   int? exited;
   int? totalCharge;
+  int? parkFloor;
 
   Car(
       {this.carId,
@@ -20,7 +21,8 @@ class Car {
       this.exitDate,
       this.estimatedTime,
       this.exited,
-      this.totalCharge});
+      this.totalCharge,
+      this.parkFloor});
 
   Car.fromJson(Map<String, dynamic> json) {
     carId = json['carId'];
@@ -29,8 +31,10 @@ class Car {
     phoneNumber = json['phoneNumber'];
     plateNumber = json['plateNumber'];
     enterDate = DateTime.parse(json['enterDate']);
-    exitDate = json['exitDate']!=null?DateTime.parse(json['exitDate']):null;
+    exitDate =
+        json['exitDate'] != null ? DateTime.parse(json['exitDate']) : null;
     estimatedTime = json['estimatedTime'];
+    parkFloor = json['parkFloor'];
     exited = json['exited'];
     totalCharge = json['totalCharge'];
   }
@@ -45,6 +49,7 @@ class Car {
     data['enterDate'] = this.enterDate;
     data['exitDate'] = this.exitDate;
     data['estimatedTime'] = this.estimatedTime;
+    data['parkFloor'] = this.parkFloor;
     data['exited'] = this.exited;
     data['totalCharge'] = this.totalCharge;
     return data;

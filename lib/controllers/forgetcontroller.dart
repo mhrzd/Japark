@@ -8,19 +8,22 @@ class ForgetController extends GetxController {
   MyDatabase database = MyDatabase.instance;
   ParkingController parkingController = Get.find();
   String? question;
-  String? password;
+  String? answer;
   Parking? parking;
-  void getQuestion(String email) async {
+  Future<void> getQuestion(String email) async {
     parking = await database.getParkingByEmail(email);
     if (parking != null) {
       question = parking!.question;
-      password = parking!.password;
+      answer = parking!.answer;
       update();
+    } else {
+      question = null;
+      answer = null;
     }
   }
 
   void check(String t) {
-    if (password == t) {
+    if (answer!.toLowerCase() == t.toLowerCase()) {
       Get.offAll(HomePage());
       parkingController.parking = parking!;
     }

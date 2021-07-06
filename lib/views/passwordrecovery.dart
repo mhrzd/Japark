@@ -10,7 +10,7 @@ import 'package:japark/views/components/accentbutton.dart';
 import 'package:japark/views/components/fulltextfield.dart';
 import 'package:japark/views/components/primarybutton.dart';
 import 'package:japark/views/homepage.dart';
-import 'package:japark/views/passworkrecovery.dart';
+import 'package:japark/views/passwordrecovery.dart';
 import 'package:japark/views/signup2page.dart';
 
 import 'components/customappbar.dart';

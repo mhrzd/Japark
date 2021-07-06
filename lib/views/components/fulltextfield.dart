@@ -17,7 +17,6 @@ class FullTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final bool obscureText;
   ThemeController themeController = ThemeController();
-
   @override
   Widget build(BuildContext context) {
     return Padding(

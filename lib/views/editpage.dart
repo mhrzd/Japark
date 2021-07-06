@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -98,9 +99,18 @@ class _EditPageState extends State<EditPage> {
                         if (parkingController.parkingNameT.text.isEmpty ||
                             parkingController.capacityT.text.isEmpty ||
                             parkingController.chargePHT.text.isEmpty ||
-                            parkingController.enterChargeT.text.isEmpty) {
+                            parkingController.enterChargeT.text.isEmpty ||
+                            parkingController.floorsT.text.isEmpty) {
                           Fluttertoast.showToast(
                               msg: 'لطفا فیلد های خالی را پر کنید');
+                        } else if (int.parse(
+                                    parkingController.chargePHT.text) <=
+                                0 ||
+                            int.parse(parkingController.enterChargeT.text) <=
+                                0 ||
+                            int.parse(parkingController.floorsT.text) <= 0) {
+                          Fluttertoast.showToast(
+                              msg: 'فیلد ها نمی توانند صفر باشند');
                         } else {
                           parkingController.editParking().then((value) {
                             if (value != null) {
@@ -138,6 +148,20 @@ class _EditPageState extends State<EditPage> {
                         hint: 'ظرفیت',
                         textEditingController: parkingController.capacityT,
                         keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 20),
+                      child: FullTextField(
+                        hint: 'تعداد طبقات',
+                        textEditingController: parkingController.floorsT,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                        ],
                       ),
                     ),
                     Padding(
@@ -146,6 +170,9 @@ class _EditPageState extends State<EditPage> {
                         hint: 'هزینه ثابت (تومان)',
                         keyboardType: TextInputType.number,
                         textEditingController: parkingController.enterChargeT,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                        ],
                       ),
                     ),
                     Padding(
@@ -154,6 +181,9 @@ class _EditPageState extends State<EditPage> {
                         hint: 'هزینه هر ساعت (تومان)',
                         keyboardType: TextInputType.number,
                         textEditingController: parkingController.chargePHT,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                        ],
                       ),
                     ),
                   ],

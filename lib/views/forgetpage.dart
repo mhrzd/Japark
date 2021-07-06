@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:japark/controllers/forgetcontroller.dart';
 import 'package:japark/controllers/parkingcontroller.dart';
@@ -9,7 +10,7 @@ import 'package:japark/models/parking.dart';
 import 'package:japark/views/components/accentbutton.dart';
 import 'package:japark/views/components/fulltextfield.dart';
 import 'package:japark/views/components/primarybutton.dart';
-import 'package:japark/views/passworkrecovery.dart';
+import 'package:japark/views/passwordrecovery.dart';
 import 'package:japark/views/signup2page.dart';
 
 import 'components/customappbar.dart';
@@ -53,10 +54,22 @@ class ForgetPage extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(bottom: 40),
                   child: PrimaryButton(
-                      onTap: () {
-                        forgetController
-                            .getQuestion(textEditingController.text);
-                        Get.to(PasswordRecovery());
+                      onTap: () async {
+                        if (textEditingController.text.isNotEmpty) {
+                          await forgetController
+                              .getQuestion(textEditingController.text)
+                              .then((value) {
+                            if (forgetController.question != null) {
+                              Get.to(PasswordRecovery());
+                            } else {
+                              Fluttertoast.showToast(
+                                  msg: 'ایمیل وارد شده اشتباه است');
+                            }
+                          });
+                        } else {
+                          Fluttertoast.showToast(
+                              msg: 'لطفا فیلد خالی را پر کنید');
+                        }
                       },
                       child: Text(
                         'ثبت',

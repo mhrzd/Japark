@@ -14,6 +14,7 @@ class AddCarController extends GetxController {
   TextEditingController phone = TextEditingController();
   TextEditingController carType = TextEditingController();
   TextEditingController duration = TextEditingController();
+
   Future<bool> addCar() async {
     Map<String, dynamic> row = {
       MyDatabase.PlateNumber:
@@ -24,6 +25,7 @@ class AddCarController extends GetxController {
       MyDatabase.EstimatedTime: duration.text,
       MyDatabase.ParkingID: parkingController.parking!.parkingId,
       MyDatabase.EnterDate: DateTime.now().toString(),
+      MyDatabase.ParkFloor: setFloor() != null ? int.parse(setFloor()!) : null,
       MyDatabase.Exited: 0
     };
     int r = await database.carEnter(row);
@@ -32,7 +34,6 @@ class AddCarController extends GetxController {
       await database.setParkingOccupied(
           {MyDatabase.Occupied: parkingController.parking!.occupied},
           parkingController.parking!.parkingId!);
-      clear();
       return true;
     } else
       return false;
@@ -47,5 +48,19 @@ class AddCarController extends GetxController {
     carType.text = '';
     name.text = '';
     duration.text = '';
+  }
+
+  String? setFloor() {
+    int d = int.parse(duration.text);
+    if (d >= 300) {
+      String g = parkingController.parking!.floors!.toString();
+      return g;
+    } else {
+      for (int i = parkingController.parking!.floors! - 1; i >= 0; i--) {
+        if (d >= (300 / (parkingController.parking!.floors!-1) * i)) {
+          return (i + 1).toString();
+        }
+      }
+    }
   }
 }
