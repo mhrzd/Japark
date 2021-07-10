@@ -11,6 +11,7 @@ class LoginController extends GetxController {
   ParkingController parkingController = Get.find();
   TextEditingController email = TextEditingController();
   TextEditingController pass = TextEditingController();
+  
   Future<bool> login() async {
     var r = await database.login(email.text.toLowerCase(), pass.text);
     if (r != null) {

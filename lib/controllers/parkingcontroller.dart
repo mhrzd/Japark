@@ -19,6 +19,7 @@ class ParkingController extends GetxController {
   TextEditingController answerT = TextEditingController();
   TextEditingController questionT = TextEditingController();
   TextEditingController floorsT = TextEditingController();
+  
   void setOccupied(int i) {
     parking!.occupied = i;
     update();
