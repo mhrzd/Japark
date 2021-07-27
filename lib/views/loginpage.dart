@@ -122,11 +122,11 @@ class LoginPage extends StatelessWidget {
                     },
                     child: Padding(
                       padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 44),
+                          const EdgeInsets.symmetric(vertical: 10, horizontal: 44),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Text('رمز عبور را فراموش کرده اید؟'),
+                          const Text('رمز عبور را فراموش کرده اید؟'),
                         ],
                       ),
                     ),

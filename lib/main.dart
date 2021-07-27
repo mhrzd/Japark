@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:japark/controllers/parkingcontroller.dart';
 import 'package:japark/views/loginpage.dart';
 
-import 'controllers/themecontroller.dart';
+import 'package:japark/controllers/themecontroller.dart';
 
 void main() {
   runApp(MyApp());

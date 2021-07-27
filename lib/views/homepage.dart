@@ -10,12 +10,11 @@ import 'package:japark/views/components/accentbutton.dart';
 import 'package:japark/views/components/customappbar.dart';
 import 'package:japark/views/editpage.dart';
 import 'package:japark/views/listpage.dart';
-import 'package:japark/views/signup2page.dart';
 import 'package:japark/views/reportpage.dart';
 import 'package:japark/views/exitcarpage.dart';
 import 'package:pie_chart/pie_chart.dart';
 
-import 'components/primarybutton.dart';
+import 'package:japark/views/components/primarybutton.dart';
 
 class HomePage extends StatelessWidget {
   ParkingController parkingController = Get.find();

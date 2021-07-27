@@ -3,12 +3,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:japark/controllers/exitcarcontroller.dart';
 import 'package:japark/controllers/themecontroller.dart';
-import 'package:japark/views/components/accentbutton.dart';
 import 'package:japark/views/components/customappbar.dart';
-import 'package:japark/views/components/fulltextfield.dart';
 import 'package:japark/views/components/plateinput.dart';
 import 'package:japark/views/components/primarybutton.dart';
 
+// ignore: must_be_immutable
 class ExitCarPage extends StatelessWidget {
   ExitCarPage({Key? key}) : super(key: key);
   ThemeController themeController = ThemeController();
@@ -43,8 +42,8 @@ class ExitCarPage extends StatelessWidget {
           Scaffold(
             appBar: CustomAppbar(
               action: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 13.0),
-                  child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 13.0),
+                  child: SizedBox(
                       width: MediaQuery.of(context).size.width * 0.07,
                       height: MediaQuery.of(context).size.width * 0.07,
                       child: SvgPicture.asset('assets/exit_purple.svg'))),
@@ -56,8 +55,8 @@ class ExitCarPage extends StatelessWidget {
                   Get.back();
                 },
                 child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 13.0),
-                    child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 13.0),
+                    child: SizedBox(
                         width: MediaQuery.of(context).size.width * 0.07,
                         height: MediaQuery.of(context).size.width * 0.07,
                         child: SvgPicture.asset('assets/back.svg'))),
@@ -72,55 +71,53 @@ class ExitCarPage extends StatelessWidget {
               ),
             ),
             backgroundColor: Colors.transparent,
-            bottomNavigationBar: Container(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 40),
-                    child: PrimaryButton(
-                        onTap: () {
-                          exitCarController.exitCar().then((value) {
-                            if (value) {
-                              showDialog(
-                                  context: context,
-                                  builder: (c) {
-                                    return AlertDialog(
-                                      content: Text(
-                                        'مبلغ پرداختی: ${exitCarController.getTotalCharge()} تومان',
-                                        style: TextStyle(
-                                            color: themeController
-                                                .theme.primaryColor,
-                                            fontFamily: 'IranSans'),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      actions: [
-                                        TextButton(
-                                            onPressed: () {
-                                              Get.back();
-                                              Get.back();
-                                            },
-                                            child: Text(
-                                              'باشه',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  color: themeController
-                                                      .theme.primaryColor,
-                                                  fontFamily: 'IranSans'),
-                                            ))
-                                      ],
-                                    );
-                                  });
-                            }
-                          });
-                        },
-                        child: Text(
-                          'ثبت',
-                          textAlign: TextAlign.center,
-                        )),
-                  )
-                ],
-              ),
+            bottomNavigationBar: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 40),
+                  child: PrimaryButton(
+                      onTap: () {
+                        exitCarController.exitCar().then((value) {
+                          if (value) {
+                            showDialog(
+                                context: context,
+                                builder: (c) {
+                                  return AlertDialog(
+                                    content: Text(
+                                      'مبلغ پرداختی: ${exitCarController.getTotalCharge()} تومان',
+                                      style: TextStyle(
+                                          color: themeController
+                                              .theme.primaryColor,
+                                          fontFamily: 'IranSans'),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () {
+                                            Get.back();
+                                            Get.back();
+                                          },
+                                          child: Text(
+                                            'باشه',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                color: themeController
+                                                    .theme.primaryColor,
+                                                fontFamily: 'IranSans'),
+                                          ))
+                                    ],
+                                  );
+                                });
+                          }
+                        });
+                      },
+                      child: const Text(
+                        'ثبت',
+                        textAlign: TextAlign.center,
+                      )),
+                )
+              ],
             ),
             body: SafeArea(
               child: SingleChildScrollView(

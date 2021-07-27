@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:japark/controllers/forgetcontroller.dart';
-import 'package:japark/controllers/parkingcontroller.dart';
-import 'package:japark/controllers/signupcontroller.dart';
 import 'package:japark/controllers/themecontroller.dart';
-import 'package:japark/models/parking.dart';
-import 'package:japark/views/components/accentbutton.dart';
 import 'package:japark/views/components/fulltextfield.dart';
 import 'package:japark/views/components/primarybutton.dart';
-import 'package:japark/views/homepage.dart';
-import 'package:japark/views/passwordrecovery.dart';
-import 'package:japark/views/signup2page.dart';
 
-import 'components/customappbar.dart';
 
-class PasswordRecovery extends StatelessWidget {
-  PasswordRecovery({Key? key}) : super(key: key);
+class PasswordRecovery extends StatefulWidget {
+  const PasswordRecovery({Key? key}) : super(key: key);
+
+  @override
+  _PasswordRecoveryState createState() => _PasswordRecoveryState();
+}
+
+class _PasswordRecoveryState extends State<PasswordRecovery> {
   ThemeController themeController = ThemeController();
+
   ForgetController forgetController = Get.find();
+
   TextEditingController textEditingController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ForgetController>(builder: (_) {
@@ -48,23 +48,21 @@ class PasswordRecovery extends StatelessWidget {
           ),
           Scaffold(
             backgroundColor: Colors.transparent,
-            bottomNavigationBar: Container(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 40),
-                    child: PrimaryButton(
-                        onTap: () {
-                          forgetController.check(textEditingController.text);
-                        },
-                        child: Text(
-                          'ثبت',
-                          textAlign: TextAlign.center,
-                        )),
-                  )
-                ],
-              ),
+            bottomNavigationBar: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 40),
+                  child: PrimaryButton(
+                      onTap: () {
+                        forgetController.check(textEditingController.text);
+                      },
+                      child: const Text(
+                        'ثبت',
+                        textAlign: TextAlign.center,
+                      )),
+                )
+              ],
             ),
             body: SafeArea(
               child: SingleChildScrollView(
@@ -94,7 +92,7 @@ class PasswordRecovery extends StatelessWidget {
                           ],
                         )),
                     Padding(
-                      padding: EdgeInsets.only(bottom: 5),
+                      padding: const EdgeInsets.only(bottom: 5),
                       child: FullTextField(
                         hint: 'پاسخ سوال امنیتی',
                         textEditingController: textEditingController,

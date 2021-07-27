@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -22,16 +21,16 @@ class SignUpController extends GetxController {
 
   Future<int> signUp() async {
     Map<String, dynamic> row = {
-      MyDatabase.Email: email.text.toLowerCase(),
-      MyDatabase.Password: pass.text,
-      MyDatabase.ParkingName: parkingName.text,
-      MyDatabase.Capacity: int.parse(capacity.text),
-      MyDatabase.EnterCharge: int.parse(enterCharge.text),
-      MyDatabase.ChargePerHour: int.parse(chargePH.text),
-      MyDatabase.Floors: int.parse(floors.text),
-      MyDatabase.Occupied: 0,
-      MyDatabase.Answer: answer.text,
-      MyDatabase.Question: question.text
+      MyDatabase.email: email.text.toLowerCase(),
+      MyDatabase.password: pass.text,
+      MyDatabase.parkingName: parkingName.text,
+      MyDatabase.capacity: int.parse(capacity.text),
+      MyDatabase.enterCharge: int.parse(enterCharge.text),
+      MyDatabase.chargePerHour: int.parse(chargePH.text),
+      MyDatabase.floors: int.parse(floors.text),
+      MyDatabase.occupied: 0,
+      MyDatabase.answer: answer.text,
+      MyDatabase.question: question.text
     };
     int a = await database.addParking(row);
     var r = await database.login(email.text, pass.text);

@@ -39,18 +39,18 @@ class Parking {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['parkingId'] = this.parkingId;
-    data['email'] = this.email;
-    data['parkingName'] = this.parkingName;
-    data['capacity'] = this.capacity;
-    data['occupied'] = this.occupied;
-    data['enterCharge'] = this.enterCharge;
-    data['chargePerHour'] = this.chargePerHour;
-    data['password'] = this.password;
-    data['question'] = this.question;
-    data['answer'] = this.answer;
-    data['floors'] = this.floors;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['parkingId'] = parkingId;
+    data['email'] = email;
+    data['parkingName'] = parkingName;
+    data['capacity'] = capacity;
+    data['occupied'] = occupied;
+    data['enterCharge'] = enterCharge;
+    data['chargePerHour'] = chargePerHour;
+    data['password'] = password;
+    data['question'] = question;
+    data['answer'] = answer;
+    data['floors'] = floors;
     return data;
   }
 }

@@ -40,18 +40,18 @@ class Car {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['carId'] = this.carId;
-    data['name'] = this.name;
-    data['model'] = this.model;
-    data['phoneNumber'] = this.phoneNumber;
-    data['plateNumber'] = this.plateNumber;
-    data['enterDate'] = this.enterDate;
-    data['exitDate'] = this.exitDate;
-    data['estimatedTime'] = this.estimatedTime;
-    data['parkFloor'] = this.parkFloor;
-    data['exited'] = this.exited;
-    data['totalCharge'] = this.totalCharge;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['carId'] = carId;
+    data['name'] = name;
+    data['model'] = model;
+    data['phoneNumber'] = phoneNumber;
+    data['plateNumber'] = plateNumber;
+    data['enterDate'] = enterDate;
+    data['exitDate'] = exitDate;
+    data['estimatedTime'] = estimatedTime;
+    data['parkFloor'] = parkFloor;
+    data['exited'] = exited;
+    data['totalCharge'] = totalCharge;
     return data;
   }
 }

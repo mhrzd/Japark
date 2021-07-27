@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:japark/controllers/themecontroller.dart';
 
+// ignore: must_be_immutable
 class FullTextField extends StatelessWidget {
   FullTextField(
       {Key? key,
@@ -20,12 +21,12 @@ class FullTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 44),
+      padding: const EdgeInsets.symmetric(horizontal: 44),
       child: ConstrainedBox(
         constraints:
-            BoxConstraints.tightFor(height: 50.0, width: double.infinity),
+            const BoxConstraints.tightFor(height: 50.0, width: double.infinity),
         child: Container(
-          padding: EdgeInsets.only(left: 22, right: 22, top: 18),
+          padding: const EdgeInsets.only(left: 22, right: 22, top: 18),
           decoration: BoxDecoration(
               color: themeController.theme.canvasColor,
               borderRadius: BorderRadius.circular(50),

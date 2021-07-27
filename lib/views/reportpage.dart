@@ -3,12 +3,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:japark/controllers/parkingcontroller.dart';
 import 'package:japark/controllers/themecontroller.dart';
-import 'package:japark/views/components/primarybutton.dart';
 
-import 'components/customappbar.dart';
+import 'package:japark/views/components/customappbar.dart';
 
 class ReportPage extends StatefulWidget {
-  ReportPage({Key? key}) : super(key: key);
+  const ReportPage({Key? key}) : super(key: key);
 
   @override
   _ReportPageState createState() => _ReportPageState();
@@ -20,6 +19,7 @@ class _ReportPageState extends State<ReportPage> {
   ParkingController parkingController = Get.find();
   @override
   void initState() {
+    // ignore: todo
     // TODO: implement initState
     super.initState();
     parkingController.getLastMonthProfit();
@@ -30,8 +30,8 @@ class _ReportPageState extends State<ReportPage> {
     return Scaffold(
       appBar: CustomAppbar(
         action: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 13.0),
-            child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 13.0),
+            child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.07,
                 height: MediaQuery.of(context).size.width * 0.07,
                 child: SvgPicture.asset('assets/graph_purple.svg'))),
@@ -40,8 +40,8 @@ class _ReportPageState extends State<ReportPage> {
           highlightColor: Colors.transparent,
           onTap: () => Get.back(),
           child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 13.0),
-              child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 13.0),
+              child: SizedBox(
                   width: MediaQuery.of(context).size.width * 0.07,
                   height: MediaQuery.of(context).size.width * 0.07,
                   child: SvgPicture.asset('assets/back.svg'))),
@@ -67,9 +67,7 @@ class _ReportPageState extends State<ReportPage> {
                   children: [
                     GetBuilder<ParkingController>(builder: (_) {
                       return Text(
-                        'در یک ماه گذشته ${parkingController.getLastMonthCarsCount()} خودرو از پارکینگ ما استفاده کردند که باعث سوددهی ${parkingController.profit} تومانی پارکینگ شد' +
-                            "\n" +
-                            'بیشترین مبلغ دریافتی ${parkingController.max} تومان و کمترین مبلغ دریافتی ${parkingController.min} تومان بوده است',
+                        'در یک ماه گذشته ${parkingController.getLastMonthCarsCount()} خودرو از پارکینگ ما استفاده کردند که باعث سوددهی ${parkingController.profit} تومانی پارکینگ شد' '\n' 'بیشترین مبلغ دریافتی ${parkingController.max} تومان و کمترین مبلغ دریافتی ${parkingController.min} تومان بوده است',
                         textDirection: TextDirection.rtl,
                         style: TextStyle(
                             color: themeController.theme.primaryColor,

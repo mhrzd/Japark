@@ -4,13 +4,14 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? leading, action;
   final Widget? child;
 
-  CustomAppbar({this.leading, this.action, this.child}) : super();
+  // ignore: use_key_in_widget_constructors
+  const CustomAppbar({this.leading, this.action, this.child}) : super();
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: SafeArea(
         child: Row(

@@ -16,27 +16,13 @@ class AddCarController extends GetxController {
   TextEditingController duration = TextEditingController();
 
   Future<bool> addCar() async {
-    Map<String, dynamic> row = {
-      MyDatabase.PlateNumber:
-          plate1.text + plate2.text + plate3.text + plate4.text,
-      MyDatabase.DriverName: name.text,
-      MyDatabase.PhoneNumber: phone.text,
-      MyDatabase.CarModel: carType.text,
-      MyDatabase.EstimatedTime: duration.text,
-      MyDatabase.ParkingID: parkingController.parking!.parkingId,
-      MyDatabase.EnterDate: DateTime.now().toString(),
-      MyDatabase.ParkFloor: setFloor() != null ? int.parse(setFloor()!) : null,
-      MyDatabase.Exited: 0
-    };
-    int r = await database.carEnter(row);
-    if (r != null) {
+    
       parkingController.setOccupied(parkingController.parking!.occupied! + 1);
       await database.setParkingOccupied(
-          {MyDatabase.Occupied: parkingController.parking!.occupied},
+          {MyDatabase.occupied: parkingController.parking!.occupied},
           parkingController.parking!.parkingId!);
       return true;
-    } else
-      return false;
+    
   }
 
   void clear() {

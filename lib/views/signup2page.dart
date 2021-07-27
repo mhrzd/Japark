@@ -9,12 +9,20 @@ import 'package:japark/views/components/customappbar.dart';
 import 'package:japark/views/components/primarybutton.dart';
 import 'package:japark/views/homepage.dart';
 
-import 'components/fulltextfield.dart';
+import 'package:japark/views/components/fulltextfield.dart';
 
-class SignUp2Page extends StatelessWidget {
-  SignUp2Page({Key? key}) : super(key: key);
+class SignUp2Page extends StatefulWidget {
+  const SignUp2Page({Key? key}) : super(key: key);
+
+  @override
+  _SignUp2PageState createState() => _SignUp2PageState();
+}
+
+class _SignUp2PageState extends State<SignUp2Page> {
   ThemeController themeController = ThemeController();
+
   SignUpController signUpController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -30,7 +38,7 @@ class SignUp2Page extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.75,
               height: MediaQuery.of(context).size.height * 0.5,
               child: Center(
-                child: Container(
+                child: SizedBox(
                   width: MediaQuery.of(context).size.width * 0.75,
                   height: MediaQuery.of(context).size.height * 0.25,
                   child: SvgPicture.asset(
@@ -46,8 +54,8 @@ class SignUp2Page extends StatelessWidget {
         Scaffold(
           appBar: CustomAppbar(
             action: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 13.0),
-                child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 13.0),
+                child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.07,
                     height: MediaQuery.of(context).size.width * 0.07,
                     child: SvgPicture.asset('assets/edit_purple.svg'))),
@@ -56,8 +64,8 @@ class SignUp2Page extends StatelessWidget {
               highlightColor: Colors.transparent,
               onTap: () => Get.back(),
               child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 13.0),
-                  child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 13.0),
+                  child: SizedBox(
                       width: MediaQuery.of(context).size.width * 0.07,
                       height: MediaQuery.of(context).size.width * 0.07,
                       child: SvgPicture.asset('assets/back.svg'))),
@@ -72,43 +80,39 @@ class SignUp2Page extends StatelessWidget {
             ),
           ),
           backgroundColor: Colors.transparent,
-          bottomNavigationBar: Container(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(bottom: 40),
-                  child: PrimaryButton(
-                      onTap: () {
-                        if (signUpController.parkingName.text.isEmpty ||
-                            signUpController.capacity.text.isEmpty ||
-                            signUpController.chargePH.text.isEmpty ||
-                            signUpController.enterCharge.text.isEmpty ||
-                            signUpController.floors.text.isEmpty) {
-                          Fluttertoast.showToast(
-                              msg: 'لطفا فیلد های خالی را پر کنید');
-                        } else if (int.parse(signUpController.capacity.text) ==
-                                0 ||
-                            int.parse(signUpController.chargePH.text) <= 0 ||
-                            int.parse(signUpController.enterCharge.text) <= 0 ||
-                            int.parse(signUpController.floors.text) <= 0) {
-                          Fluttertoast.showToast(
-                              msg: 'فیلد ها نمی توانند صفر باشند');
-                        } else {
-                          signUpController.signUp().then((value) {
-                            if (value != null) {
-                              Get.offAll(HomePage());
-                            }
-                          });
-                        }
-                      },
-                      child: Text(
-                        'ثبت',
-                        textAlign: TextAlign.center,
-                      )),
-                )
-              ],
-            ),
+          bottomNavigationBar: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 40),
+                child: PrimaryButton(
+                    onTap: () {
+                      if (signUpController.parkingName.text.isEmpty ||
+                          signUpController.capacity.text.isEmpty ||
+                          signUpController.chargePH.text.isEmpty ||
+                          signUpController.enterCharge.text.isEmpty ||
+                          signUpController.floors.text.isEmpty) {
+                        Fluttertoast.showToast(
+                            msg: 'لطفا فیلد های خالی را پر کنید');
+                      } else if (int.parse(signUpController.capacity.text) ==
+                              0 ||
+                          int.parse(signUpController.chargePH.text) <= 0 ||
+                          int.parse(signUpController.enterCharge.text) <= 0 ||
+                          int.parse(signUpController.floors.text) <= 0) {
+                        Fluttertoast.showToast(
+                            msg: 'فیلد ها نمی توانند صفر باشند');
+                      } else {
+                        signUpController.signUp().then((value) {
+                          Get.offAll(HomePage());
+                        });
+                      }
+                    },
+                    child: const Text(
+                      'ثبت',
+                      textAlign: TextAlign.center,
+                    )),
+              )
+            ],
           ),
           body: SafeArea(
             child: SingleChildScrollView(
@@ -124,7 +128,7 @@ class SignUp2Page extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 20),
+                    padding: const EdgeInsets.only(bottom: 20),
                     child: FullTextField(
                       hint: 'ظرفیت',
                       inputFormatters: [
@@ -135,7 +139,7 @@ class SignUp2Page extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 20),
+                    padding: const EdgeInsets.only(bottom: 20),
                     child: FullTextField(
                       hint: 'تعداد طبقات',
                       inputFormatters: [
@@ -146,7 +150,7 @@ class SignUp2Page extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 20),
+                    padding: const EdgeInsets.only(bottom: 20),
                     child: FullTextField(
                       hint: 'هزینه ثابت (تومان)',
                       keyboardType: TextInputType.number,
@@ -157,7 +161,7 @@ class SignUp2Page extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 5),
+                    padding: const EdgeInsets.only(bottom: 5),
                     child: FullTextField(
                       hint: 'هزینه هر ساعت (تومان)',
                       keyboardType: TextInputType.number,

@@ -14,7 +14,6 @@ class ExitCarController extends GetxController {
   TextEditingController phone = TextEditingController();
     Map<String, dynamic>? data;
   Future<bool> exitCar() async {
-    var t = database.getAllCars();
 
     if (plate1.text.isEmpty ||
         plate2.text.isEmpty ||
@@ -32,25 +31,26 @@ class ExitCarController extends GetxController {
       return false;
     }
     Map<String, dynamic> row = {
-      MyDatabase.ExitDate: DateTime.now().toString(),
-      MyDatabase.TotalCharge: getTotalCharge(),
-      MyDatabase.Exited: 1
+      MyDatabase.exitDate: DateTime.now().toString(),
+      MyDatabase.totalCharge: getTotalCharge(),
+      MyDatabase.exited: 1
     };
     int r = await database.carExit(
-        row, data![MyDatabase.CarID], parkingController.parking!.parkingId!);
-    if (r != 0 && r != null) {
+        row, data![MyDatabase.carID], parkingController.parking!.parkingId!);
+    if (r != 0) {
       parkingController.setOccupied(parkingController.parking!.occupied! - 1);
       await database.setParkingOccupied(
-          {MyDatabase.Occupied: parkingController.parking!.occupied},
+          {MyDatabase.occupied: parkingController.parking!.occupied},
           parkingController.parking!.parkingId!);
       clear();
       return true;
-    } else
+    } else {
       return false;
+    }
   }
 
   getTotalCharge() {
-    DateTime s = DateTime.parse(data![MyDatabase.EnterDate]!);
+    DateTime s = DateTime.parse(data![MyDatabase.enterDate]!);
     DateTime t = DateTime.parse(DateTime.now().toString());
     int price = parkingController.parking!.enterCharge!;  
     price +=

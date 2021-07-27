@@ -3,15 +3,22 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:japark/controllers/signupcontroller.dart';
 import 'package:japark/controllers/themecontroller.dart';
-import 'package:japark/views/components/accentbutton.dart';
 import 'package:japark/views/components/fulltextfield.dart';
 import 'package:japark/views/components/primarybutton.dart';
 import 'package:japark/views/signup2page.dart';
 
-class SignUpPage extends StatelessWidget {
-  SignUpPage({Key? key}) : super(key: key);
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key? key}) : super(key: key);
+
+  @override
+  _SignUpPageState createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
   ThemeController themeController = ThemeController();
+
   SignUpController signUpController = Get.put(SignUpController());
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -39,51 +46,49 @@ class SignUpPage extends StatelessWidget {
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
-          bottomNavigationBar: Container(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(bottom: 40),
-                  child: PrimaryButton(
-                      onTap: () async {
-                        signUpController.checkEmail().then((value) {
-                          if (signUpController.email.text.isEmpty ||
-                              signUpController.pass.text.isEmpty ||
-                              signUpController.repass.text.isEmpty ||
-                              signUpController.question.text.isEmpty ||
-                              signUpController.answer.text.isEmpty) {
-                            Fluttertoast.showToast(
-                                msg: 'لطفا فیلد های خالی را پر کنید');
-                          } else if (signUpController.pass.text !=
-                              signUpController.repass.text) {
-                            Fluttertoast.showToast(
-                                msg: 'رمزعبور با تکرار آن مغایرت دارد');
-                          } else if (!signUpController.email.text.isEmail) {
-                            Fluttertoast.showToast(
-                                msg: 'فرمت ایمیل وارد شده اشتباه است');
-                          } else if (!value) {
-                            Fluttertoast.showToast(
-                                msg: 'ایمیل وارد شده تکراری است');
-                          } else {
-                            Get.to(SignUp2Page());
-                          }
-                        });
-                      },
-                      child: Text(
-                        'ادامه',
-                        textAlign: TextAlign.center,
-                      )),
-                )
-              ],
-            ),
+          bottomNavigationBar: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 40),
+                child: PrimaryButton(
+                    onTap: () async {
+                      signUpController.checkEmail().then((value) {
+                        if (signUpController.email.text.isEmpty ||
+                            signUpController.pass.text.isEmpty ||
+                            signUpController.repass.text.isEmpty ||
+                            signUpController.question.text.isEmpty ||
+                            signUpController.answer.text.isEmpty) {
+                          Fluttertoast.showToast(
+                              msg: 'لطفا فیلد های خالی را پر کنید');
+                        } else if (signUpController.pass.text !=
+                            signUpController.repass.text) {
+                          Fluttertoast.showToast(
+                              msg: 'رمزعبور با تکرار آن مغایرت دارد');
+                        } else if (!signUpController.email.text.isEmail) {
+                          Fluttertoast.showToast(
+                              msg: 'فرمت ایمیل وارد شده اشتباه است');
+                        } else if (!value) {
+                          Fluttertoast.showToast(
+                              msg: 'ایمیل وارد شده تکراری است');
+                        } else {
+                          Get.to(const SignUp2Page());
+                        }
+                      });
+                    },
+                    child: const Text(
+                      'ادامه',
+                      textAlign: TextAlign.center,
+                    )),
+              )
+            ],
           ),
           body: SafeArea(
             child: SingleChildScrollView(
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(44.0),
+                    padding: const EdgeInsets.all(44.0),
                     child: Align(
                       alignment: Alignment.topRight,
                       child: Hero(
@@ -109,7 +114,7 @@ class SignUpPage extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 20),
+                    padding: const EdgeInsets.only(bottom: 20),
                     child: FullTextField(
                       hint: 'رمزعبور',
                       obscureText: true,
@@ -117,7 +122,7 @@ class SignUpPage extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 20),
+                    padding: const EdgeInsets.only(bottom: 20),
                     child: FullTextField(
                       hint: 'تکرار رمزعبور',
                       obscureText: true,
@@ -125,7 +130,7 @@ class SignUpPage extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 20),
+                    padding: const EdgeInsets.only(bottom: 20),
                     child: FullTextField(
                       hint: 'سوال بازیابی رمز',
                       textEditingController: signUpController.question,

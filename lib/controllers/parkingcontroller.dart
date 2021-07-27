@@ -19,7 +19,7 @@ class ParkingController extends GetxController {
   TextEditingController answerT = TextEditingController();
   TextEditingController questionT = TextEditingController();
   TextEditingController floorsT = TextEditingController();
-  
+
   void setOccupied(int i) {
     parking!.occupied = i;
     update();
@@ -58,7 +58,7 @@ class ParkingController extends GetxController {
     r.forEach((car) {
       if (car.exitDate != null) {
         if (car.exitDate!
-            .isAfter(DateTime.now().subtract(Duration(days: 30)))) {
+            .isAfter(DateTime.now().subtract(const Duration(days: 30)))) {
           lastMonthCars.add(car);
         }
       }
@@ -97,7 +97,7 @@ class ParkingController extends GetxController {
 
     int a = await database.updateParking(t.toJson(), parking!.parkingId);
     var x = await database.getParkingById(parking!.parkingId!);
-    parking = Parking.fromJson(x!); 
+    parking = Parking.fromJson(x!);
     return a;
   }
 

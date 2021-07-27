@@ -1,20 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:japark/controllers/forgetcontroller.dart';
-import 'package:japark/controllers/parkingcontroller.dart';
-import 'package:japark/controllers/signupcontroller.dart';
 import 'package:japark/controllers/themecontroller.dart';
-import 'package:japark/models/parking.dart';
-import 'package:japark/views/components/accentbutton.dart';
 import 'package:japark/views/components/fulltextfield.dart';
 import 'package:japark/views/components/primarybutton.dart';
 import 'package:japark/views/passwordrecovery.dart';
-import 'package:japark/views/signup2page.dart';
-
-import 'components/customappbar.dart';
-
+// ignore: must_be_immutable
 class ForgetPage extends StatelessWidget {
   ForgetPage({Key? key}) : super(key: key);
   ThemeController themeController = ThemeController();
@@ -47,37 +39,35 @@ class ForgetPage extends StatelessWidget {
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
-          bottomNavigationBar: Container(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(bottom: 40),
-                  child: PrimaryButton(
-                      onTap: () async {
-                        if (textEditingController.text.isNotEmpty) {
-                          await forgetController
-                              .getQuestion(textEditingController.text)
-                              .then((value) {
-                            if (forgetController.question != null) {
-                              Get.to(PasswordRecovery());
-                            } else {
-                              Fluttertoast.showToast(
-                                  msg: 'ایمیل وارد شده اشتباه است');
-                            }
-                          });
-                        } else {
-                          Fluttertoast.showToast(
-                              msg: 'لطفا فیلد خالی را پر کنید');
-                        }
-                      },
-                      child: Text(
-                        'ثبت',
-                        textAlign: TextAlign.center,
-                      )),
-                )
-              ],
-            ),
+          bottomNavigationBar: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 40),
+                child: PrimaryButton(
+                    onTap: () async {
+                      if (textEditingController.text.isNotEmpty) {
+                        await forgetController
+                            .getQuestion(textEditingController.text)
+                            .then((value) {
+                          if (forgetController.question != null) {
+                            Get.to(const PasswordRecovery());
+                          } else {
+                            Fluttertoast.showToast(
+                                msg: 'ایمیل وارد شده اشتباه است');
+                          }
+                        });
+                      } else {
+                        Fluttertoast.showToast(
+                            msg: 'لطفا فیلد خالی را پر کنید');
+                      }
+                    },
+                    child: const Text(
+                      'ثبت',
+                      textAlign: TextAlign.center,
+                    )),
+              )
+            ],
           ),
           body: SafeArea(
             child: SingleChildScrollView(
