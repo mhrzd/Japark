@@ -9,18 +9,16 @@ on:
   pull_request:
   push:
 jobs:
-  build-test:
-    name: Build & Test
+  linter:
     runs-on: ubuntu-latest
+    name: Lint flutter code
     steps:
-      - uses: actions/checkout@v2     # checkout the repo
-      - run: npm ci                   # install packages
-      - run: npm test                 # run tests (configured to use jest-junit reporter)
-
-      - name: Test Report
-        uses: dorny/test-reporter@v1
-        if: success() || failure()    # run this step even if previous step failed
-        with:
-          name: JEST Tests            # Name of the check run which will be created
-          path: reports/jest-*.xml    # Path to test results
-          reporter: jest-junit        # Format of test results
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v1
+    - run: flutter pub get
+    - name: Analyze Flutter
+      uses: ValentinVignal/action-dart-analyze@v0.11
+      with:
+        fail-on: 'warning'
